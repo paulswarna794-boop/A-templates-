@@ -1,0 +1,39 @@
+name: Build
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Validate project structure
+        run: |
+          files="README.md CLAUDE.md AGENTS.md CHANGELOG.md"
+          for f in $files; do
+            if [ ! -f "$f" ]; then
+              echo "::error::Missing required file: $f"
+              exit 1
+            fi
+            echo "OK: $f"
+          done
+
+      - name: Validate CHANGELOG format
+        run: |
+          if ! grep -q '## \[Unreleased\]' CHANGELOG.md; then
+            echo "::error::CHANGELOG.md must contain an [Unreleased] section"
+            exit 1
+          fi
+          echo "OK: CHANGELOG has [Unreleased] section"
+
+      - name: Validate AGENTS.md reference
+        run: |
+          if ! grep -q 'AGENTS.md' CLAUDE.md; then
+            echo "::error::CLAUDE.md must reference AGENTS.md"
+            exit 1
+          fi
+          echo "OK: CLAUDE.md references AGENTS.md"

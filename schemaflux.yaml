@@ -1,0 +1,20 @@
+site:
+  name: "agentic-template"
+  base_url: "https://greynewell.github.io/agentic-template"
+  description: "A starter template for AI-first development. Scaffolds AGENTS.md, CLAUDE.md, CHANGELOG, and README so coding agents have the right context from day one."
+  language: "en"
+  author: "Grey Newell"
+  author_url: "https://greynewell.com"
+  repo_url: "https://github.com/greynewell/agentic-template"
+
+paths:
+  data: "./data"
+  templates: "./templates"
+  output: "./docs"
+
+data:
+  format: "markdown"
+  entity_type: "page"
+
+templates:
+  homepage: "index.html"

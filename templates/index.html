@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="{{.Site.Language}}">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>{{.Site.Name}}</title>
+  <meta name="description" content="{{.Site.Description}}">
+  <meta name="author" content="{{.Site.Author}}">
+  <link rel="canonical" href="{{.Site.BaseURL}}/">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=DM+Serif+Display&family=Inter:wght@400;500;600&display=swap">
+  <style>
+    :root {
+      --color-primary: #5B7B5E;
+      --color-primary-light: #EEF3EE;
+      --color-text: #1a1a1a;
+      --color-text-muted: #6b7280;
+      --color-bg: #fafaf9;
+      --color-surface: #ffffff;
+      --color-border: #e5e5e5;
+      --radius: 8px;
+      --max-width: 720px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body {
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
+      color: var(--color-text);
+      background: var(--color-bg);
+      line-height: 1.6;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: var(--color-primary); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    .container { max-width: var(--max-width); margin: 0 auto; padding: 0 1.5rem; }
+
+    /* Header */
+    .site-header {
+      padding: 1.5rem 0;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .site-header nav {
+      display: flex;
+      gap: 1.5rem;
+      align-items: center;
+    }
+    .site-header .brand {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.125rem;
+      color: var(--color-text);
+    }
+    .site-header .brand:hover { text-decoration: none; }
+    .site-header nav a {
+      font-size: 0.875rem;
+      font-weight: 500;
+      color: var(--color-text-muted);
+    }
+    .site-header nav a:hover { color: var(--color-primary); text-decoration: none; }
+
+    /* Hero */
+    .hero {
+      padding: 4rem 0 2rem;
+    }
+    .hero h1 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 2.25rem;
+      font-weight: 400;
+      line-height: 1.2;
+      margin-bottom: 1rem;
+    }
+    .hero .tagline {
+      font-size: 1.125rem;
+      color: var(--color-text-muted);
+      max-width: 560px;
+      margin-bottom: 1.5rem;
+    }
+    .hero-actions {
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+    }
+    .btn {
+      display: inline-block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      padding: 0.6rem 1.25rem;
+      border-radius: var(--radius);
+      transition: opacity 0.15s;
+    }
+    .btn:hover { text-decoration: none; opacity: 0.9; }
+    .btn-primary { background: var(--color-primary); color: #fff; }
+    .btn-outline { border: 1px solid var(--color-primary); color: var(--color-primary); }
+
+    /* Section */
+    section { padding: 2rem 0; }
+    section h2 {
+      font-family: 'DM Serif Display', serif;
+      font-size: 1.5rem;
+      font-weight: 400;
+      margin-bottom: 1.25rem;
+      padding-bottom: 0.5rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+    section p, section li {
+      font-size: 0.9375rem;
+      color: var(--color-text-muted);
+      line-height: 1.7;
+    }
+
+    /* File table */
+    .file-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin: 1rem 0;
+      font-size: 0.875rem;
+    }
+    .file-table th, .file-table td {
+      text-align: left;
+      padding: 0.625rem 0.75rem;
+      border-bottom: 1px solid var(--color-border);
+    }
+    .file-table th {
+      font-weight: 600;
+      color: var(--color-text);
+      background: var(--color-primary-light);
+    }
+    .file-table td:first-child {
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.8125rem;
+      color: var(--color-primary);
+      white-space: nowrap;
+    }
+    .file-table td:last-child { color: var(--color-text-muted); }
+
+    /* Code block */
+    .code-block {
+      background: #1e293b;
+      color: #e2e8f0;
+      font-family: 'SF Mono', 'Fira Code', monospace;
+      font-size: 0.8125rem;
+      padding: 1.25rem;
+      border-radius: var(--radius);
+      overflow-x: auto;
+      line-height: 1.7;
+      margin: 1rem 0;
+    }
+
+    /* Steps */
+    .steps { list-style: none; counter-reset: step; }
+    .steps li {
+      counter-increment: step;
+      padding: 0.5rem 0 0.5rem 2.5rem;
+      position: relative;
+    }
+    .steps li::before {
+      content: counter(step);
+      position: absolute;
+      left: 0;
+      top: 0.5rem;
+      width: 1.75rem;
+      height: 1.75rem;
+      background: var(--color-primary-light);
+      color: var(--color-primary);
+      font-size: 0.8125rem;
+      font-weight: 600;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Footer */
+    .site-footer {
+      padding: 2rem 0;
+      margin-top: 2rem;
+      border-top: 1px solid var(--color-border);
+      text-align: center;
+    }
+    .footer-links {
+      display: flex;
+      justify-content: center;
+      gap: 1.5rem;
+    }
+    .footer-links a {
+      font-size: 0.8125rem;
+      color: var(--color-text-muted);
+    }
+    .footer-links a:hover { color: var(--color-primary); }
+
+    @media (max-width: 640px) {
+      .hero h1 { font-size: 1.75rem; }
+      .file-table { font-size: 0.8125rem; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="site-header">
+      <nav>
+        <a class="brand" href="{{.Site.BaseURL}}/">agentic-template</a>
+        <a href="#whats-included">Files</a>
+        <a href="#how-it-works">How It Works</a>
+        <a href="#quick-start">Quick Start</a>
+        <a href="{{.Site.RepoURL}}">GitHub</a>
+      </nav>
+    </header>
+
+    <main>
+      <div class="hero">
+        <h1>AI-First Project Scaffolding</h1>
+        <p class="tagline">{{.Site.Description}}</p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="https://github.com/greynewell/agentic-template/generate">Use This Template</a>
+          <a class="btn btn-outline" href="{{.Site.RepoURL}}">View Source</a>
+        </div>
+      </div>
+
+      <section id="quick-start">
+        <h2>Quick Start</h2>
+        <p>Click <strong>Use this template</strong> on GitHub, or clone via the CLI:</p>
+        <div class="code-block">gh repo create my-project --template greynewell/agentic-template --clone</div>
+        <ol class="steps">
+          <li>Replace placeholder sections in <code>README.md</code> with your project details</li>
+          <li>Add project-specific rules to <code>AGENTS.md</code> (language conventions, test requirements, etc.)</li>
+          <li>Start logging changes in <code>CHANGELOG.md</code> under <code>[Unreleased]</code></li>
+          <li>Extend <code>.github/workflows/build.yml</code> with your build, test, and deploy steps</li>
+        </ol>
+      </section>
+
+      <section id="whats-included">
+        <h2>What's Included</h2>
+        <table class="file-table">
+          <thead>
+            <tr><th>File</th><th>Purpose</th></tr>
+          </thead>
+          <tbody>
+            <tr><td>README.md</td><td>Structured project README with badges, architecture diagram, and contribution guide</td></tr>
+            <tr><td>AGENTS.md</td><td>Guidelines and hard rules for AI coding agents</td></tr>
+            <tr><td>CLAUDE.md</td><td>Entry point for Claude Code &mdash; references AGENTS.md</td></tr>
+            <tr><td>CHANGELOG.md</td><td>Keep a Changelog format with [Unreleased] section</td></tr>
+            <tr><td>.github/workflows/build.yml</td><td>CI that validates project structure on every push and PR</td></tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section id="how-it-works">
+        <h2>How It Works</h2>
+        <p><strong>CLAUDE.md</strong> is the first file Claude Code reads when it enters your project. It points to <strong>AGENTS.md</strong>, which contains the rules any AI coding agent should follow &mdash; changelog discipline, commit conventions, code style expectations, and PR requirements.</p>
+        <p style="margin-top: 0.75rem;">The <strong>build workflow</strong> enforces the structure: required files must exist, the changelog must have an <code>[Unreleased]</code> section, and <code>CLAUDE.md</code> must reference <code>AGENTS.md</code>. This keeps agents and humans aligned from the first commit.</p>
+      </section>
+
+      <section id="customizing">
+        <h2>Customizing</h2>
+        <p>After creating your repo from this template, adapt each file to your project:</p>
+        <ol class="steps">
+          <li><strong>README.md</strong> &mdash; Replace placeholder sections with your project's name, description, architecture, and build commands</li>
+          <li><strong>AGENTS.md</strong> &mdash; Add project-specific rules (language conventions, test requirements, deployment constraints)</li>
+          <li><strong>CHANGELOG.md</strong> &mdash; Start logging changes under <code>[Unreleased]</code></li>
+          <li><strong>build.yml</strong> &mdash; Extend with your actual build, test, and deploy steps</li>
+        </ol>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <div class="footer-links">
+        <a href="{{.Site.RepoURL}}">GitHub</a>
+        <a href="{{.Site.AuthorURL}}">{{.Site.Author}}</a>
+      </div>
+    </footer>
+  </div>
+</body>
+</html>
